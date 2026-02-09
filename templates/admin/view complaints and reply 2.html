@@ -1,0 +1,101 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<table width="259" height="121" border="1">#}
+{#  <tr>#}
+{#    <th width="102" scope="row">REPLY</th>#}
+{#    <td width="171"><form id="form1" name="form1" method="post" action="/view_complaints_reply2post">#}
+{#      <label>#}
+{#        <input type="text" name="textfield" />#}
+{#        </label>#}
+{#    </form>    </td>#}
+{#  </tr>#}
+{#  <tr>#}
+{#    <th colspan="2" scope="row"><form id="form2" name="form2" method="post" action="/view_complaints_reply2post">#}
+{#      <label>#}
+{#        <input type="submit" name="Submit" value="SEND" />#}
+{#        </label>#}
+{#    </form>#}
+{#    </th>#}
+{#  </tr>#}
+{#</table>#}
+{#</body>#}
+{#</html>#}
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form action="/view_complaints_reply2post" method="post">#}
+{#  <table width="200" border="1">#}
+{#    <tr>#}
+{#      <th scope="col"><label>#}
+{#        <input type="text" name="textfield" />#}
+{#      </label></th>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td><label>#}
+{#        <input type="submit" name="Submit" value="Submit" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+
+
+{% extends 'admin/index2.html' %}
+{% block body %}
+<!--suppress ALL -->
+    <html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untitled Document</title>
+
+  <!-- Bootstrap 4 CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-pzjw8f+ua7Kw1TIq0Q9pK03yKhpP59nQ6tqPeLg0v6FJz5rJlM4pI0EKctKh+cES" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-center">REPLY</h5>
+            <form action="/view_complaints_reply2post" method="post">
+              <div class="form-group">
+                <label for="textfield">Enter your reply:</label>
+                <input type="text" name="textfield" id="textfield" class="form-control" placeholder="Type your reply here" />
+              </div>
+              <button type="submit" name="Submit" class="btn btn-success btn-block">SEND</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 4 JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zyzWOnzH/qhU4t0P1EchD6V6I2D2mWv4W0F04fG6" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0Q9pK03yKhpP59nQ6tqPeLg0v6FJz5rJlM4pI0EKctKh+cES" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0Q9pK03yKhpP59nQ6tqPeLg0v6FJz5rJlM4pI0EKctKh+cES" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+{% endblock %}

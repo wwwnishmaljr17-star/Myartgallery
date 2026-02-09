@@ -1,0 +1,60 @@
+{% extends 'artist/index2.html' %}
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-lg">
+            <div class="card-header bg-primary text-white py-3">
+                <h4 class="m-0 font-weight-bold"><i class="fas fa-pencil-alt mr-2"></i>Add New Design</h4>
+            </div>
+            <div class="card-body p-4 p-md-5">
+                <form action="/add_designpost" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold text-dark"><i class="fas fa-heading mr-1 text-primary"></i>
+                            DESIGN NAME</label>
+                        <input type="text" name="textfield"
+                            class="form-control form-control-lg border-primary-soft shadow-sm" required
+                            pattern="[A-Z a-z.]{3,25}" placeholder="Enter design name">
+                        <small class="text-muted">3-25 characters, letters and dots only.</small>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold text-dark"><i class="fas fa-image mr-1 text-primary"></i> DESIGN
+                            IMAGE</label>
+                        <div class="custom-file">
+                            <input type="file" name="file" class="custom-file-input shadow-sm" id="designFile" required>
+                            <label class="custom-file-label border-primary-soft" for="designFile">Choose design
+                                image...</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold text-dark"><i class="fas fa-align-left mr-1 text-primary"></i>
+                            DESCRIPTION</label>
+                        <textarea name="textfield2" class="form-control form-control-lg border-primary-soft shadow-sm"
+                            required rows="4" placeholder="Describe the design..."></textarea>
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <button type="submit" name="Submit"
+                            class="btn btn-lg btn-primary btn-block py-3 font-weight-bold shadow">
+                            <i class="fas fa-upload mr-2"></i>SAVE DESIGN
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof $ !== 'undefined') {
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        }
+    });
+</script>
+{% endblock %}

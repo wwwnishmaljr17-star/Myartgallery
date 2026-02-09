@@ -1,0 +1,65 @@
+{% extends 'artist/index2.html' %}
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-lg">
+            <div class="card-header bg-primary text-white py-3">
+                <h4 class="m-0 font-weight-bold"><i class="fas fa-edit mr-2"></i>Edit Post</h4>
+            </div>
+            <div class="card-body p-4 p-md-5">
+                <form id="form2" name="form2" enctype="multipart/form-data" method="post" action="/edit_postpost">
+                    {% csrf_token %}
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold text-dark"><i class="fas fa-heading mr-1 text-primary"></i> POST
+                            NAME</label>
+                        <input type="text" name="postname"
+                            class="form-control form-control-lg border-primary-soft shadow-sm"
+                            value="{{ data.postname }}" required pattern="[A-Z a-z.]{3,100}"
+                            placeholder="Enter artwork name">
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold text-dark d-block"><i class="fas fa-image mr-1 text-primary"></i>
+                            CURRENT IMAGE</label>
+                        {% if data.design %}
+                        <img src="{{ data.design.url }}" class="img-thumbnail shadow-sm mb-3"
+                            style="max-height: 200px;">
+                        {% endif %}
+                        <div class="custom-file">
+                            <input type="file" name="file" class="custom-file-input" id="postFile">
+                            <label class="custom-file-label border-primary-soft" for="postFile">Update artwork
+                                image...</label>
+                        </div>
+                        <small class="text-muted">Leave empty to keep current image.</small>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold text-dark"><i class="fas fa-align-left mr-1 text-primary"></i>
+                            DESCRIPTION</label>
+                        <textarea name="textfield2" class="form-control form-control-lg border-primary-soft shadow-sm"
+                            rows="4" placeholder="Describe your artwork...">{{ data.post }}</textarea>
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <button type="submit" name="Submit"
+                            class="btn btn-lg btn-primary btn-block py-3 font-weight-bold shadow">
+                            <i class="fas fa-save mr-2"></i>SAVE CHANGES
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof $ !== 'undefined') {
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        }
+    });
+</script>
+{% endblock %}

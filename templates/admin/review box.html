@@ -1,0 +1,111 @@
+{#{% extends 'admin/index.html' %}#}
+{#{% block body %}#}
+{##}
+{##}
+{#<body>#}
+{#<table width="413" height="151" border="1">#}
+{##}
+{#  <tr>#}
+{#    <th width="49" scope="row">S.NO</th>#}
+{#    <td width="67">REVIEW</td>#}
+{#    <td width="66">RATING</td>#}
+{#    <td width="203">USER</td>#}
+{#  </tr>#}
+{#    {%  for i in data %}#}
+{#  <tr>#}
+{#    <th height="45" scope="row">{{ forloop.counter }}&nbsp;</th>#}
+{#    <td>{{ i.review}}&nbsp;</td>#}
+{#    <td>&nbsp;{{ i.rating }}</td>#}
+{#    <td> &nbsp;{{ i.USERID.name }}</td>#}
+{#  </tr>#}
+{#    {% endfor %}#}
+{#</table>#}
+{#</body>#}
+{#{% endblock %}#}
+{##}
+
+{% extends 'admin/index2.html' %}
+{% block body %}
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: black; /* Set text color to black for the entire body */
+        }
+
+        table {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            color: black; /* Set text color to black for table headers and cells */
+        }
+
+        th {
+            color: black; /* Keep header text color white for contrast */
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f1f1f1;
+        }
+
+        tr:hover {
+            background-color: #e2e2e2;
+        }
+
+        td a {
+            color: black; /* Change link text color to black */
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+
+        td a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th width="49" scope="row">S.NO</th>
+            <td width="67">REVIEW</td>
+            <td width="66">RATING</td>
+            <td width="66">ARTIST</td>
+            <td width="203">USER</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <th height="45" scope="row">{{ forloop.counter }}&nbsp;</th>
+            <td>{{ i.review }}&nbsp;</td>
+            <td>&nbsp;{{ i.rating }}</td>
+            <td>&nbsp;{{ i.ARTIST.name }}</td>
+            <td>&nbsp;{{ i.USERID.name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+{% endblock %}

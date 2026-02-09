@@ -1,0 +1,86 @@
+{% extends 'artist/index2.html' %}
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card shadow-lg border-0 rounded-lg">
+            <div class="card-header bg-primary text-white py-3">
+                <h4 class="m-0 font-weight-bold"><i class="fas fa-user-edit mr-2"></i>My Profile</h4>
+            </div>
+            <div class="card-body p-4 p-md-5">
+                <form action="/view_profile_and_updatepost" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="profile-img-container mb-3">
+                                {% if profile.image %}
+                                <img src="{{ profile.image.url }}" class="img-thumbnail rounded-circle shadow-sm"
+                                    style="width: 200px; height: 200px; object-fit: cover;">
+                                {% else %}
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto shadow-sm"
+                                    style="width: 200px; height: 200px;">
+                                    <i class="fas fa-user fa-5x text-muted"></i>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" name="image" class="custom-file-input" id="profileImage">
+                                <label class="custom-file-label text-left" for="profileImage">Change photo</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold text-dark">Name</label>
+                                    <input type="text" name="name" class="form-control border-primary-soft shadow-sm"
+                                        value="{{ profile.name }}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold text-dark">Email</label>
+                                    <input type="email" name="email" class="form-control border-primary-soft shadow-sm"
+                                        value="{{ profile.email }}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold text-dark">Phone</label>
+                                    <input type="text" name="phone" class="form-control border-primary-soft shadow-sm"
+                                        value="{{ profile.phone }}" required pattern="[6-9][0-9]{9}">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold text-dark">Place</label>
+                                    <input type="text" name="place" class="form-control border-primary-soft shadow-sm"
+                                        value="{{ profile.place }}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold text-dark">Post</label>
+                                    <input type="text" name="post" class="form-control border-primary-soft shadow-sm"
+                                        value="{{ profile.post }}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold text-dark">Pincode</label>
+                                    <input type="text" name="pin" class="form-control border-primary-soft shadow-sm"
+                                        value="{{ profile.pin }}" required pattern="[0-9]{6}">
+                                </div>
+                            </div>
+                            <div class="text-right mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg px-5 shadow">
+                                    <i class="fas fa-save mr-2"></i>Update Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof $ !== 'undefined') {
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,140 @@
+{#{% extends 'admin/index.html' %}#}
+{#{% block body %}#}
+{#<body>#}
+{#<table width="755" height="235" border="1">#}
+{#  <tr>#}
+{#    <th scope="col">S.NO</th>#}
+{#    <th scope="col">NAME</th>#}
+{#    <th scope="col">CONTACT INFO </th>#}
+{#    <th scope="col">ADDRESS</th>#}
+{#       <th scope="col">Image</th>#}
+{#    <th scope="col">email</th>#}
+{##}
+{##}
+{#  </tr>#}
+{#    {%  for i in data %}#}
+{#  <tr>#}
+{#  <td>{{ forloop.counter }}</td>#}
+{#    <td>{{ i.name }}&nbsp;</td>#}
+{#    <td>{{ i.phone }}&nbsp;</td>#}
+{#    <td>{{ i.place }},{{ i.pin }},{{ i.post }}&nbsp;</td>#}
+{#      <td><img src="{{ i.image.url }}" width="100px" height="100px"/> </td>#}
+{#     <td>{{ i.email }}&nbsp;</td>#}
+{##}
+{#      <td>#}
+{#          {% if i.LOGINID.type == 'pending' %}#}
+{#          <a href="accept_artist/{{ i.LOGINID_id }}">ACCEPT</a>|#}
+{#          <a href="/reject_artist/{{ i.LOGINID_id }}">REJECT</a>#}
+{#          {% else %}#}
+{#          {{ i.LOGINID.type }}#}
+{#          {% endif %}#}
+{##}
+{#      </td>#}
+{##}
+{#  </tr>#}
+{#    {%  endfor %}#}
+{##}
+{#</table>#}
+{#</body>#}
+{#{% endblock %}#}
+
+{% extends 'admin/index2.html' %}
+{% block body %}
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: black; /* Set text color to black for the entire body */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            color: black; /* Set text color to black for table data and headers */
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        td img {
+            border-radius: 5px;
+        }
+
+        td a {
+            color: #4CAF50; /* Set link text color */
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            margin-right: 5px;
+        }
+
+        td a:hover {
+            background-color: #45a049;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tr:hover {
+            background-color: #e2e2e2;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">NAME</th>
+            <th scope="col">CONTACT INFO</th>
+            <th scope="col">ADDRESS</th>
+            <th scope="col">Image</th>
+            <th scope="col">email</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.name }}&nbsp;</td>
+            <td>{{ i.phone }}&nbsp;</td>
+            <td>{{ i.place }}, {{ i.pin }}, {{ i.post }}&nbsp;</td>
+            <td><img src="{{ i.image.url }}" width="100px" height="100px" /></td>
+            <td>{{ i.email }}&nbsp;</td>
+
+            <td>
+                {% if i.LOGINID.type == 'pending' %}
+                <a href="accept_artist/{{ i.LOGINID_id }}">ACCEPT</a> |
+                <a href="/reject_artist/{{ i.LOGINID_id }}">REJECT</a>
+                {% else %}
+                {{ i.LOGINID.type }}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+{% endblock %}

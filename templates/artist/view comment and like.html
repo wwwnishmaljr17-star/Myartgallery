@@ -1,0 +1,39 @@
+{% extends 'artist/index2.html' %}
+{% block body %}
+<div class="card shadow-sm border-0 rounded-lg">
+  <div class="card-header bg-primary text-white py-3">
+    <h4 class="m-0 font-weight-bold"><i class="fas fa-comments mr-2"></i>Comments & Likes</h4>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th class="px-4">S.NO</th>
+            <th>USER</th>
+            <th>COMMENTS</th>
+            <th class="px-4">DATE</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in data %}
+          <tr>
+            <td class="px-4 font-weight-bold text-muted">{{ forloop.counter }}</td>
+            <td class="font-weight-bold text-dark">{{ i.USERID.name }}</td>
+            <td>{{ i.comments }}</td>
+            <td class="px-4 text-muted small">{{ i.date }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4" class="text-center py-5 text-muted">
+              <i class="far fa-comment-dots fa-3x mb-3 d-block"></i>
+              <p class="mb-0">No comments yet.</p>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,121 @@
+{#{% extends 'admin/index.html' %}#}
+{#{% block body %}#}
+{##}
+{##}
+{#<body>#}
+{#<table width="762" height="227" border="1">#}
+{#  <tr>#}
+{#    <th scope="col">S.NO</th>#}
+{#    <th scope="col">NAME</th>#}
+{#    <th scope="col">COMPLAINTS</th>#}
+{#    <th scope="col"></th>#}
+{##}
+{#  </tr>#}
+{#    {%  for i in val %}#}
+{#  <tr>#}
+{#    <td>{{ forloop.counter }}&nbsp;</td>#}
+{#      <td>{{ i.USERID.name  }}&nbsp;</td>#}
+{#    <td>{{ i.complaint }}&nbsp;</td>#}
+{#    <td>{% if i.reply == 'pending' %}#}
+{#    <a href="/view_complaints_reply2/{{ i.id }}">REPLY</a>#}
+{#    {% else %}#}
+{#        {{ i.reply }}#}
+{#        {% endif %}#}
+{#    </td>#}
+{##}
+{#  </tr>#}
+{#    {% endfor %}#}
+{##}
+{#</table>#}
+{#<div align="justify"></div>#}
+{#</body>#}
+{#{% endblock %}#}
+
+{% extends 'admin/index2.html' %}
+{% block body %}
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: black; /* Set text color to black for the entire body */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            color: black; /* Set text color to black for table headers and cells */
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white; /* Keep header text color white for contrast */
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f1f1f1;
+        }
+
+        tr:hover {
+            background-color: #e2e2e2;
+        }
+
+        td a {
+            color: #007BFF; /* Set link text color */
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+
+        td a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">NAME</th>
+            <th scope="col">COMPLAINTS</th>
+            <th scope="col"></th>
+        </tr>
+        {% for i in val %}
+        <tr>
+            <td>{{ forloop.counter }}&nbsp;</td>
+            <td>{{ i.USERID.name }}&nbsp;</td>
+            <td>{{ i.complaint }}&nbsp;</td>
+            <td>{% if i.reply == 'pending' %}
+                <a href="/view_complaints_reply2/{{ i.id }}">REPLY</a>
+                {% else %}
+                    {{ i.reply }}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div align="justify"></div>
+</body>
+
+{% endblock %}

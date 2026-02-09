@@ -1,0 +1,196 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form2" name="form2" enctype="multipart/form-data" method="post" action="/artist_registrationpost">#}
+{#<table width="262" border="1">#}
+{##}
+{#  <tr>#}
+{#    <td width="106">name</td>#}
+{#    <td width="140">#}
+{#      <label>#}
+{#        <input type="text" name="textfield" required pattern="[A-Z a-z.]{3,25}" />#}
+{#        </label>#}
+{#       </td>#}
+{#  </tr>#}
+{#  <tr>#}
+{#    <td>image</td>#}
+{#    <td>#}
+{#      <label>#}
+{#        <input type="file" name="file" required />#}
+{#        </label>#}
+{#          </td>#}
+{#  </tr>#}
+{#  <tr>#}
+{#    <td>email</td>#}
+{#    <td><input type="text" name="textfield3"  required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}"/></td>#}
+{#  </tr>#}
+{#  <tr>#}
+{#    <td>phone</td>#}
+{#    <td><input type="text" name="textfield4" required pattern="[6789][0-9]{9}" /></td>#}
+{#  </tr>#}
+{#  <tr>#}
+{#    <td>place</td>#}
+{#    <td><input type="text" name="textfield5"required pattern="[A-Z a-z.]{3,25}" /></td>#}
+{#  </tr>#}
+{#  <tr>#}
+{#    <td>pin</td>#}
+{#    <td><input type="text" name="textfield6"required pattern="[0-9]{6}" /></td>#}
+{#  </tr>#}
+{#  <tr>#}
+{#    <td>post</td>#}
+{#    <td><input type="text" name="textfield7"required pattern="[A-Z a-z.]{3,25}" /></td>#}
+{#  </tr>#}
+{#  <tr>#}
+{#    <td>username</td>#}
+{#    <td><input type="text" name="textfield8"required pattern="[ a-z.]{3,25}"  /></td>#}
+{#  </tr>#}
+{#  <tr>#}
+{#    <td>password</td>#}
+{#    <td><input type="text" name="textfield9" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/></td>#}
+{#  </tr>#}
+{#  <tr>#}
+{#    <td colspan="2">#}
+{#      <div align="center">#}
+{#        <input type="submit" name="Submit2" value="ADD" />#}
+{#      </div>#}
+{#   </td>#}
+{#  </tr>#}
+{#</table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <title>Artist Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    table {
+      width: 50%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    td {
+      padding: 12px 20px;
+      text-align: left;
+      font-size: 14px;
+      color: #333;
+    }
+
+    td input[type="text"], td input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    td input[type="text"]:focus, td input[type="file"]:focus {
+      border-color: #66afe9;
+      outline: none;
+    }
+
+    label {
+      display: inline-block;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="form2" name="form2" enctype="multipart/form-data" method="post" action="/artist_registrationpost">
+    <table border="1">
+      <tr>
+        <td>Name</td>
+        <td>
+          <label>
+            <input type="text" name="textfield" required pattern="[A-Z a-z.]{3,25}" />
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Image</td>
+        <td>
+          <label>
+            <input type="file" name="file" required />
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td><input type="text" name="textfield3" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}"/></td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td><input type="text" name="textfield4" required pattern="[6789][0-9]{9}" /></td>
+      </tr>
+      <tr>
+        <td>Place</td>
+        <td><input type="text" name="textfield5" required pattern="[A-Z a-z.]{3,25}" /></td>
+      </tr>
+      <tr>
+        <td>PIN</td>
+        <td><input type="text" name="textfield6" required pattern="[0-9]{6}" /></td>
+      </tr>
+      <tr>
+        <td>Post</td>
+        <td><input type="text" name="textfield7" required pattern="[A-Z a-z.]{3,25}" /></td>
+      </tr>
+      <tr>
+        <td>Username</td>
+        <td><input type="text" name="textfield8" required pattern="[a-z.]{3,25}" /></td>
+      </tr>
+      <tr>
+        <td>Password</td>
+        <td><input type="text" name="textfield9" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" /></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="center">
+          <input type="submit" name="Submit2" value="ADD" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>
+

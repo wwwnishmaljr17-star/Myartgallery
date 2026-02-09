@@ -80,20 +80,25 @@ WSGI_APPLICATION = 'ART_GALLERY.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# Use SQLite by default for easy hosting (Free on PythonAnywhere)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'artgallerys',
-        'USER':'root',
-        'PASSWORD':'1234567890',
-        'HOST':'localhost',
-        'PORT':'3306'
-
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Optional: MySQL Configuration (Requires Paid Plan on PythonAnywhere)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'artgallerys',
+#         'USER': 'root',
+#         'PASSWORD': 'yourpassword',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
 
 # Password validation

@@ -29,8 +29,8 @@ def admin2(request):
     return render(request,'admin/index2.html')
 
 def loginPost(request):
-    uname=request.POST["username"]
-    passw=request.POST["password"]
+    uname=request.POST["username"].strip()
+    passw=request.POST["password"].strip()
 
 
     lo=loginTbl.objects.filter(username__iexact=uname,password=passw)

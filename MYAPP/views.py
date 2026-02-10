@@ -33,9 +33,9 @@ def loginPost(request):
     passw=request.POST["password"]
 
 
-    lo=loginTbl.objects.filter(username=uname,password=passw)
+    lo=loginTbl.objects.filter(username__iexact=uname,password=passw)
     if lo.exists():
-        p=loginTbl.objects.get(username=uname,password=passw)
+        p=lo.first()
         request.session['lid'] = p.id
         if p.type =='admin':
             ob1=auth.authenticate(username= 'admin',password='admin')

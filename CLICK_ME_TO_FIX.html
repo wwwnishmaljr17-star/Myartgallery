@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FIX ART GALLERY CONNECTION</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f0f2f5;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: #2563eb;
+        }
+
+        .code {
+            background: #f3f4f6;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            color: #ef4444;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>⚠️ Port 8000 Required</h1>
+        <p>The server is running, but you are missing the port number in your browser. <br><br>
+            Instead of just <span class="code">127.0.0.1</span>, you MUST use:<br>
+            <span class="code" style="font-size: 1.5rem;">http://127.0.0.1:8000/</span>
+        </p>
+
+        <a href="http://127.0.0.1:8000/" class="btn">🚀 OPEN MY GALLERY NOW</a>
+
+        <p style="margin-top: 30px; font-size: 0.9rem; color: #9ca3af;">Click the button above to bypass the error.</p>
+    </div>
+</body>
+
+</html>

@@ -1,68 +1,110 @@
 {% extends 'artist/index2.html' %}
 {% block body %}
 <div class="row justify-content-center">
-    <div class="col-lg-10">
-        <div class="card shadow-lg border-0 rounded-lg">
-            <div class="card-header bg-primary text-white py-3">
-                <h4 class="m-0 font-weight-bold"><i class="fas fa-user-edit mr-2"></i>My Profile</h4>
+    <div class="col-lg-11">
+        <div class="card border-0 shadow-2xl rounded-2xl overflow-hidden transition-all duration-700">
+            <div class="card-header py-5 px-5 border-0 text-white"
+                style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h2 class="font-weight-bold mb-1 text-white">Artist Profile</h2>
+                        <p class="mb-0 text-white-50">Refine your identity in the ArtGallery community</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl shadow-lg d-flex align-items-center justify-content-center"
+                        style="width: 60px; height: 60px; background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(255,255,255,0.2);">
+                        <i class="fas fa-user-check text-white fa-lg"></i>
+                    </div>
+                </div>
             </div>
-            <div class="card-body p-4 p-md-5">
+            <div class="card-body p-0">
                 <form action="/view_profile_and_updatepost" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-4 text-center mb-4">
-                            <div class="profile-img-container mb-3">
-                                {% if profile.image %}
-                                <img src="{{ profile.image.url }}" class="img-thumbnail rounded-circle shadow-sm"
-                                    style="width: 200px; height: 200px; object-fit: cover;">
-                                {% else %}
-                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto shadow-sm"
-                                    style="width: 200px; height: 200px;">
-                                    <i class="fas fa-user fa-5x text-muted"></i>
+                    <div class="row no-gutters">
+                        <div class="col-md-4 bg-light border-right py-5 text-center">
+                            <div class="position-relative d-inline-block mb-4">
+                                <div class="profile-avatar shadow-xl border-4 border-white rounded-circle overflow-hidden mx-auto"
+                                    style="width: 220px; height: 220px; background: #fff;">
+                                    {% if profile.image %}
+                                    <img src="{{ profile.image.url }}" class="w-100 h-100" style="object-fit: cover;">
+                                    {% else %}
+                                    <div
+                                        class="w-100 h-100 d-flex align-items-center justify-content-center bg-gray-100">
+                                        <i class="fas fa-user fa-6x text-gray-300"></i>
+                                    </div>
+                                    {% endif %}
                                 </div>
-                                {% endif %}
+                                <label for="profileImage"
+                                    class="position-absolute shadow-lg bg-primary text-white rounded-circle d-flex align-items-center justify-content-center cursor-pointer transition-all hover-scale"
+                                    style="bottom: 15px; right: 15px; width: 50px; height: 50px;">
+                                    <i class="fas fa-camera"></i>
+                                    <input type="file" name="image" id="profileImage" class="d-none">
+                                </label>
                             </div>
-                            <div class="custom-file">
-                                <input type="file" name="image" class="custom-file-input" id="profileImage">
-                                <label class="custom-file-label text-left" for="profileImage">Change photo</label>
+                            <h4 class="font-weight-bold text-dark px-3">{{ profile.name }}</h4>
+                            <p class="text-primary font-weight-bold small text-uppercase mb-4">Professional Artist</p>
+
+                            <div class="px-4 text-left mt-5">
+                                <div class="alert alert-info border-0 shadow-sm rounded-lg py-3">
+                                    <p class="small mb-0 text-dark"><i class="fas fa-lightbulb mr-2 text-warning"></i>
+                                        Keep your profile updated to gain more visibility from collectors.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8 p-4 p-md-5">
+                            <h5 class="text-dark font-weight-bold mb-4 d-flex align-items-center">
+                                <span class="bg-primary-soft text-primary p-2 rounded-lg mr-3"><i
+                                        class="fas fa-info-circle"></i></span>
+                                Personal Information
+                            </h5>
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="font-weight-bold text-dark">Name</label>
-                                    <input type="text" name="name" class="form-control border-primary-soft shadow-sm"
+                                <div class="col-md-6 mb-4">
+                                    <label class="small font-weight-bold text-muted text-uppercase mb-2 d-block">Full
+                                        Name</label>
+                                    <input type="text" name="name"
+                                        class="form-control form-control-lg border-soft shadow-sm"
                                         value="{{ profile.name }}" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="font-weight-bold text-dark">Email</label>
-                                    <input type="email" name="email" class="form-control border-primary-soft shadow-sm"
+                                <div class="col-md-6 mb-4">
+                                    <label class="small font-weight-bold text-muted text-uppercase mb-2 d-block">Email
+                                        Address</label>
+                                    <input type="email" name="email"
+                                        class="form-control form-control-lg border-soft shadow-sm"
                                         value="{{ profile.email }}" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="font-weight-bold text-dark">Phone</label>
-                                    <input type="text" name="phone" class="form-control border-primary-soft shadow-sm"
+                                <div class="col-md-6 mb-4">
+                                    <label class="small font-weight-bold text-muted text-uppercase mb-2 d-block">Contact
+                                        Phone</label>
+                                    <input type="text" name="phone"
+                                        class="form-control form-control-lg border-soft shadow-sm"
                                         value="{{ profile.phone }}" required pattern="[6-9][0-9]{9}">
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="font-weight-bold text-dark">Place</label>
-                                    <input type="text" name="place" class="form-control border-primary-soft shadow-sm"
+                                <div class="col-md-6 mb-4">
+                                    <label
+                                        class="small font-weight-bold text-muted text-uppercase mb-2 d-block">Location /
+                                        Place</label>
+                                    <input type="text" name="place"
+                                        class="form-control form-control-lg border-soft shadow-sm"
                                         value="{{ profile.place }}" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="font-weight-bold text-dark">Post</label>
-                                    <input type="text" name="post" class="form-control border-primary-soft shadow-sm"
+                                <div class="col-md-6 mb-4">
+                                    <label class="small font-weight-bold text-muted text-uppercase mb-2 d-block">Bio /
+                                        Post</label>
+                                    <input type="text" name="post"
+                                        class="form-control form-control-lg border-soft shadow-sm"
                                         value="{{ profile.post }}" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="font-weight-bold text-dark">Pincode</label>
-                                    <input type="text" name="pin" class="form-control border-primary-soft shadow-sm"
+                                <div class="col-md-6 mb-4">
+                                    <label
+                                        class="small font-weight-bold text-muted text-uppercase mb-2 d-block">Pincode</label>
+                                    <input type="text" name="pin"
+                                        class="form-control form-control-lg border-soft shadow-sm"
                                         value="{{ profile.pin }}" required pattern="[0-9]{6}">
                                 </div>
                             </div>
-                            <div class="text-right mt-4">
-                                <button type="submit" class="btn btn-primary btn-lg px-5 shadow">
-                                    <i class="fas fa-save mr-2"></i>Update Profile
+                            <div class="mt-5 border-top pt-4 text-right">
+                                <button type="submit"
+                                    class="btn btn-primary btn-xl px-5 rounded-pill shadow-lg font-weight-bold transition-all hover-grow">
+                                    <i class="fas fa-save mr-2"></i>SAVE CHANGES
                                 </button>
                             </div>
                         </div>
@@ -73,14 +115,70 @@
     </div>
 </div>
 
+<style>
+    .shadow-2xl {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .shadow-xl {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .rounded-2xl {
+        border-radius: 1.5rem;
+    }
+
+    .bg-primary-soft {
+        background-color: rgba(59, 130, 246, 0.1);
+    }
+
+    .border-soft {
+        border: 1px solid #e2e8f0;
+    }
+
+    .hover-scale:hover {
+        transform: scale(1.1);
+    }
+
+    .hover-grow:hover {
+        transform: scale(1.03) translateY(-2px);
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .btn-xl {
+        font-size: 1.1rem;
+        padding: 1rem 2.5rem;
+    }
+
+    .opacity-80 {
+        opacity: 0.8;
+    }
+
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+
+    .profile-avatar {
+        transition: border-color 0.3s;
+    }
+
+    .profile-avatar:hover {
+        border-color: #3b82f6 !important;
+    }
+</style>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        if (typeof $ !== 'undefined') {
-            $(".custom-file-input").on("change", function () {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
+    document.getElementById('profileImage').onchange = function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.querySelector('.profile-avatar img').src = e.target.result;
+            }
+            reader.readAsDataURL(this.files[0]);
         }
-    });
+    };
 </script>
 {% endblock %}

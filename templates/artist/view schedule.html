@@ -1,48 +1,68 @@
 {% extends 'artist/index2.html' %}
 {% block body %}
-<div class="card shadow-sm border-0 rounded-lg">
-    <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
-        <h4 class="m-0 font-weight-bold"><i class="fas fa-calendar-alt mr-2"></i>My Schedules</h4>
-        <a href="/add_schedule" class="btn btn-light btn-sm font-weight-bold shadow-sm">
+<div class="card shadow-2xl border-0 rounded-2xl overflow-hidden transition-all duration-700">
+    <div class="card-header py-4 px-5 border-0 d-flex justify-content-between align-items-center"
+        style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+        <h4 class="m-0 font-weight-bold text-white"><i class="fas fa-calendar-alt mr-2"></i>My Schedules</h4>
+        <a href="/add_schedule"
+            class="btn btn-light btn-sm font-weight-bold shadow-sm rounded-pill px-4 transition-all hover-pop">
             <i class="fas fa-plus mr-1"></i>Add New Schedule
         </a>
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
             <table class="table table-hover mb-0">
-                <thead class="thead-light">
+                <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-4">S.NO</th>
-                        <th>DATE</th>
-                        <th>TIME</th>
-                        <th class="px-4 text-center">ACTION</th>
+                        <th class="px-5 py-3 text-uppercase small font-weight-bold text-muted"
+                            style="letter-spacing: 1px;">#</th>
+                        <th class="py-3 text-uppercase small font-weight-bold text-muted" style="letter-spacing: 1px;">
+                            Date</th>
+                        <th class="py-3 text-uppercase small font-weight-bold text-muted" style="letter-spacing: 1px;">
+                            Time</th>
+                        <th class="px-5 py-3 text-center text-uppercase small font-weight-bold text-muted"
+                            style="letter-spacing: 1px;">Options</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                     {% for i in data %}
-                    <tr>
-                        <td class="px-4 font-weight-bold text-muted">{{ forloop.counter }}</td>
-                        <td>{{ i.date }}</td>
-                        <td>{{ i.time }}</td>
-                        <td class="px-4 text-center">
-                            <div class="btn-group">
-                                <a href="/edit_schedule/{{ i.id }}"
-                                    class="btn btn-outline-primary btn-sm rounded-pill px-3 mr-1">
-                                    <i class="fas fa-edit mr-1"></i>Edit
+                    <tr class="transition-all hover:bg-blue-50">
+                        <td class="px-5 py-4 font-weight-bold text-dark">{{ forloop.counter }}</td>
+                        <td class="py-4"><span class="badge badge-light p-2 font-weight-500 shadow-sm border"><i
+                                    class="far fa-calendar-alt mr-2 text-primary"></i>{{ i.date }}</span></td>
+                        <td class="py-4"><span class="badge badge-light p-2 font-weight-500 shadow-sm border"><i
+                                    class="far fa-clock mr-2 text-primary"></i>{{ i.time }}</span></td>
+                        <td class="px-5 py-4 text-center">
+                            <div class="btn-group shadow-sm rounded-pill overflow-hidden">
+                                <a href="/edit_schedule/{{ i.id }}" class="btn btn-white btn-sm px-4 border-right"
+                                    title="Edit Schedule">
+                                    <i class="fas fa-edit text-primary"></i>
                                 </a>
-                                <a href="/delete_schedule/{{ i.id }}"
-                                    class="btn btn-outline-danger btn-sm rounded-pill px-3"
-                                    onclick="return confirm('Delete this schedule?')">
-                                    <i class="fas fa-trash-alt mr-1"></i>Delete
+                                <a href="/delete_schedule/{{ i.id }}" class="btn btn-white btn-sm px-4"
+                                    onclick="return confirm('Delete this schedule?')" title="Delete Schedule">
+                                    <i class="fas fa-trash-alt text-danger"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="4" class="text-center py-5 text-muted">
-                            <i class="fas fa-calendar-times fa-3x mb-3 d-block"></i>
-                            <p class="mb-0">No schedules set.</p>
+                        <td colspan="4" class="text-center py-5">
+                            <div class="empty-state-card py-5 px-4 mx-3 rounded-2xl"
+                                style="background: #f8faff; border: 2px dashed #4e73df; opacity: 0.9;">
+                                <div
+                                    class="icon-pulse mb-4 mx-auto d-flex align-items-center justify-content-center shadow-lg">
+                                    <i class="fas fa-calendar-check fa-3x"></i>
+                                </div>
+                                <h4 class="font-weight-bold text-dark mb-2">Build Your Availability</h4>
+                                <p class="text-muted mb-4 mx-auto" style="max-width: 350px;">A clear schedule is an
+                                    invitation for collectors. Set your dates and let the ArtGallery community reach
+                                    out.</p>
+                                <a href="/add_schedule"
+                                    class="btn btn-primary btn-lg rounded-pill px-5 shadow-lg transition-all hover-grow">
+                                    <i class="fas fa-calendar-plus mr-2"></i>CREATE FIRST SCHEDULE
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     {% endfor %}
@@ -51,4 +71,70 @@
         </div>
     </div>
 </div>
+
+<style>
+    .shadow-2xl {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    .rounded-2xl {
+        border-radius: 1.5rem !important;
+    }
+
+    .bg-gray-50 {
+        background-color: #f9fafb;
+    }
+
+    .hover\:bg-blue-50:hover {
+        background-color: #f0f7ff;
+    }
+
+    .font-weight-500 {
+        font-weight: 500;
+    }
+
+    .btn-white {
+        background: #fff;
+        color: #4e73df;
+    }
+
+    .btn-white:hover {
+        background: #f8f9fc;
+    }
+
+    .icon-pulse {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+        color: white;
+        border-radius: 50%;
+        animation: pulse-shadow 2s infinite;
+    }
+
+    @keyframes pulse-shadow {
+        0% {
+            box-shadow: 0 0 0 0 rgba(78, 115, 223, 0.5);
+        }
+
+        70% {
+            box-shadow: 0 0 0 15px rgba(78, 115, 223, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(78, 115, 223, 0);
+        }
+    }
+
+    .hover-pop:hover {
+        transform: translateY(-3px);
+    }
+
+    .hover-grow:hover {
+        transform: scale(1.05) translateY(-3px);
+    }
+
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+</style>
 {% endblock %}

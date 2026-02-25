@@ -79,6 +79,7 @@ class bookingsTbl(models.Model):
     # DESIGNID=models.ForeignKey(designTbl,on_delete=models.CASCADE)
     SCHEDULE=models.ForeignKey(schedulesTbl,on_delete=models.CASCADE)
     status=models.CharField(max_length=100)
+    payment_status=models.CharField(max_length=100,default="unpaid")
 
 
 class productTbl(models.Model):

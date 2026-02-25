@@ -375,8 +375,30 @@ def view_other_work_and_like(request):
 @login_required(login_url='/')
 
 def payment_details(request):
-    ob = paymentsTbl.objects.filter(ORDER__product__ARTIST__LOGINID=request.session['lid'])
-    return render(request,'artist/view payment details.html',{'data': ob})
+    lid = request.session.get('lid')
+    order_payments = paymentsTbl.objects.filter(ORDER__product__ARTIST__LOGINID=lid)
+    direct_payments = ProductpaymentsTbl.objects.filter(PRODUCT__ARTIST__LOGINID=lid)
+    
+    # Simple combination for display
+    combined_data = []
+    for p in order_payments:
+        combined_data.append({
+            'id': p.id,
+            'item': p.ORDER.product.name,
+            'date': p.date,
+            'amount': p.amount,
+            'status': p.status
+        })
+    for p in direct_payments:
+        combined_data.append({
+            'id': p.id,
+            'item': p.PRODUCT.name,
+            'date': p.date,
+            'amount': p.amount,
+            'status': p.status
+        })
+        
+    return render(request, 'artist/view payment details.html', {'data': combined_data})
 @login_required(login_url='/')
 def view_post(request):
     ob = postTbl.objects.filter(ARTIST__LOGINID_id=request.session['lid'])
@@ -391,22 +413,35 @@ def edit_post(request,id):
 @login_required(login_url='/')
 
 def edit_postpost(request):
+    try:
+        name = request.POST.get("postname")
+        desc = request.POST.get("textfield2")
+        pid = request.session.get('id')
+        
+        ob = postTbl.objects.filter(id=pid).first()
+        if not ob:
+            return HttpResponse('''<script>alert('Post not found');window.location='/view_post'</script>''')
 
-    name = request.POST["postname"]
-    desc = request.POST["textfield2"]
-    ob = postTbl.objects.get(id= request.session['id'])
-    if 'file' in request.FILES:
-        design = request.FILES['file']
-        fs = FileSystemStorage()
-        fp = fs.save(design.name, design)
-        ob.design = fp
+        if 'file' in request.FILES:
+            design = request.FILES['file']
+            fs = FileSystemStorage()
+            fp = fs.save(design.name, design)
+            ob.design = fp
 
-    ob.postname =name
-    ob.post =desc
-    ob.date = datetime.date.today()
-    ob.ARTIST = artistTbl.objects.get(LOGINID__id=request.session['lid'])
-    ob.save()
-    return HttpResponse('''<script>alert('added sucsessfully');window.location='/view_post'</script>''')
+        ob.postname = name
+        ob.post = desc
+        ob.date = datetime.date.today()
+        
+        lid = request.session.get('lid')
+        artist = artistTbl.objects.filter(LOGINID_id=lid).first()
+        if artist:
+            ob.ARTIST = artist
+            
+        ob.save()
+        return HttpResponse('''<script>alert('Updated successfully');window.location='/view_post'</script>''')
+    except Exception as e:
+        print(e)
+        return HttpResponse('''<script>alert('An error occurred');window.location='/view_post'</script>''')
 @login_required(login_url='/')
 
 def delete_post(request,id):
@@ -422,21 +457,33 @@ def add_post(request):
 @login_required(login_url='/')
 
 def add_postpost(request):
-    name=request.POST["textfield"]
-    desc=request.POST["textfield2"]
-    design= request.FILES['file']
+    try:
+        name = request.POST.get("textfield")
+        desc = request.POST.get("textfield2")
+        design = request.FILES.get('file')
 
-    fs = FileSystemStorage()
-    fp = fs.save(design.name, design)
+        if not design:
+             return HttpResponse('''<script>alert('Please select a file');window.location='/add_post'</script>''')
 
-    ob = postTbl()
-    ob.postname = name
-    ob.design= fp
-    ob.post = desc
-    ob.date= datetime.date.today()
-    ob.ARTIST = artistTbl.objects.get(LOGINID__id=request.session['lid'])
-    ob.save()
-    return HttpResponse('''<script>alert('added sucsessfully');window.location='/view_post'</script>''')
+        fs = FileSystemStorage()
+        fp = fs.save(design.name, design)
+
+        lid = request.session.get('lid')
+        artist = artistTbl.objects.filter(LOGINID_id=lid).first()
+        if not artist:
+            return HttpResponse('''<script>alert('Artist profile not found');window.location='/add_post'</script>''')
+
+        ob = postTbl()
+        ob.postname = name
+        ob.design = fp
+        ob.post = desc
+        ob.date = datetime.date.today()
+        ob.ARTIST = artist
+        ob.save()
+        return HttpResponse('''<script>alert('Added successfully');window.location='/view_post'</script>''')
+    except Exception as e:
+        print(e)
+        return HttpResponse(f'''<script>alert('An error occurred');window.location='/add_post'</script>''')
     return HttpResponse("ok")
 @login_required(login_url='/')
 
@@ -452,15 +499,17 @@ def edit_product(request,id):
 @login_required(login_url='/')
 
 def edit_productpost(request):
-    name = request.POST["productName"]
-    desc = request.POST["description"]
-    price = request.POST["price"]
+    name = request.POST.get("productName")
+    desc = request.POST.get("description")
+    price = request.POST.get("price")
 
+    pid = request.session.get('pid')
+    ob = productTbl.objects.filter(id=pid).first()
+    if not ob:
+        return HttpResponse('''<script>alert('Product not found');window.location='/view_product'</script>''')
 
-    ob = productTbl.objects.get(id= request.session['pid'])
     if 'workFile' in request.FILES:
         work = request.FILES['workFile']
-
         fs = FileSystemStorage()
         fp = fs.save(work.name, work)
         ob.work = fp
@@ -468,10 +517,14 @@ def edit_productpost(request):
     ob.name = name
     ob.description = desc
     ob.date = datetime.datetime.now()
-    ob.amount=price
-    ob.ARTIST = artistTbl.objects.get(LOGINID__id=request.session['lid'])
+    ob.amount = price
+    
+    lid = request.session.get('lid')
+    artist = artistTbl.objects.filter(LOGINID_id=lid).first()
+    if artist:
+        ob.ARTIST = artist
     ob.save()
-    return HttpResponse('''<script>alert('added sucsessfully');window.location='/view_product'</script>''')
+    return HttpResponse('''<script>alert('Updated successfully');window.location='/view_product'</script>''')
 @login_required(login_url='/')
 
 def delete_product(request,id):
@@ -482,22 +535,38 @@ def delete_product(request,id):
 @login_required(login_url='/')
 
 def view_profile_and_update(request):
-    profile = artistTbl.objects.get(LOGINID=request.session['lid'])
-    return render(request,'artist/view profile and update.html',{'profile':profile})
+    lid = request.session.get('lid')
+    profile = artistTbl.objects.filter(LOGINID_id=lid).first()
+    if not profile:
+        from .models import loginTbl
+        login_obj = loginTbl.objects.filter(id=lid).first()
+        if not login_obj:
+            return HttpResponse('''<script>alert('Invalid session');window.location='/'</script>''')
+        profile = artistTbl.objects.create(
+            LOGINID=login_obj,
+            name=login_obj.username,
+            email="",
+            phone=0,
+            place="",
+            pin=0,
+            post=""
+        )
+    return render(request, 'artist/view profile and update.html', {'profile': profile})
 
 @login_required(login_url='/')
 
 def view_profile_and_updatepost(request):
-    name=request.POST["name"]
+    name = request.POST.get("name")
+    email = request.POST.get("email")
+    phone = request.POST.get("phone")
+    place = request.POST.get("place")
+    pin = request.POST.get("pin")
+    post = request.POST.get("post")
 
-    email=request.POST["email"]
-    phone=request.POST["phone"]
-    place=request.POST["place"]
-    pin=request.POST["pin"]
-    post=request.POST["post"]
-
-
-    c=artistTbl.objects.get(LOGINID=request.session['lid'])
+    lid = request.session.get('lid')
+    c = artistTbl.objects.filter(LOGINID_id=lid).first()
+    if not c:
+        return HttpResponse('''<script>alert('Profile not found');window.location='/view_profile_and_update'</script>''')
 
     if 'image' in request.FILES:
         image = request.FILES["image"]
@@ -669,7 +738,7 @@ def user_view_booking(request):
     print(ob,"HHHHHHHHHHHHHHH")
     mdata=[]
     for i in ob:
-        data={'id':i.id,'date':i.date,'DESIGN':i.SCHEDULE.date,'status':i.status}
+        data={'id':i.id,'date':i.date,'DESIGN':i.SCHEDULE.date,'status':i.status, 'payment_status': i.payment_status}
         mdata.append(data)
         print(mdata)
     return JsonResponse({"status":"ok","data":mdata})
@@ -905,9 +974,15 @@ def chatwithuser(request):
 
 def chatview(request):
     ob = userTbl.objects.all()
-    d=[]
+    d = []
+    default_img = "placeholder"
     for i in ob:
-        r={"name":i.name,'email':i.email,'loginid':i.LOGIN.id}
+        r = {
+            "name": i.name,
+            "email": i.email,
+            "loginid": i.LOGIN.id,
+            "photo": default_img
+        }
         d.append(r)
     return JsonResponse(d, safe=False)
 
@@ -938,8 +1013,14 @@ def coun_msg(request,id):
     for i in combined_chat:
         res.append({"from_id":i.from_id.id,"msg":i.message,"date":i.date,"chat_id":i.id})
 
-    obu=userTbl.objects.get(LOGIN__id=id)
-    return JsonResponse({"data":res,"name":obu.name,"user_lid":obu.LOGIN.id})
+    obu = userTbl.objects.get(LOGIN__id=id)
+    default_img = "placeholder"
+    return JsonResponse({
+        "data": res,
+        "name": obu.name,
+        "user_lid": obu.LOGIN.id,
+        "photo": default_img
+    })
 
 #
 # def User_viewchat(request):
@@ -1082,29 +1163,123 @@ def recomendation(request):
 
 def payment(request):
     if request.method == 'POST':
-        oid = request.POST['sid']
-        lid = request.POST['lid']
+        ptype = request.POST.get('type', 'product')
+        pid = request.POST.get('id', request.POST.get('sid'))
+        lid = request.POST.get('lid')
 
-        if not oid or not lid:
+        if not pid or not lid:
             return HttpResponse("Missing required parameters", status=400)
 
-        order = productTbl.objects.get(id=oid)
-        amount = order.amount
-        order.save()
+        try:
+            if ptype == 'booking':
+                booking = bookingsTbl.objects.get(id=pid)
+                booking.payment_status = 'paid'
+                booking.save()
+                return HttpResponse("Booking payment recorded successfully")
 
-        # Create a new Payment record
-        payment = ProductpaymentsTbl(
-            PRODUCT=order,
-            date=datetime.datetime.now().today(),  # Set the date to today's date
-            status='Paid',  # Set the payment status
-            amount=amount,
-        )
-        payment.save()
-
-        return HttpResponse("Payment recorded successfully")
-
+            elif ptype == 'product':
+                product = productTbl.objects.get(id=pid)
+                amount = product.amount
+                
+                # Create a new Payment record
+                payment_record = ProductpaymentsTbl(
+                    PRODUCT=product,
+                    date=datetime.datetime.now().date(),
+                    status='Paid',
+                    amount=amount,
+                )
+                payment_record.save()
+                return HttpResponse("Product payment recorded successfully")
+            
+            else:
+                return HttpResponse("Invalid payment type", status=400)
+                
+        except Exception as e:
+            print(e)
+            return HttpResponse(f"Error processing payment: {str(e)}", status=500)
 
     else:
         return HttpResponse("Invalid request method", status=405)
 
 
+def add_productpost(request):
+    try:
+        name = request.POST.get("productName")
+        desc = request.POST.get("description")
+        price = request.POST.get("price")
+        work = request.FILES.get('workFile')
+
+        if not work:
+             return HttpResponse('''<script>alert('Please select a file');window.location='/add_product'</script>''')
+
+        fs = FileSystemStorage()
+        fp = fs.save(work.name, work)
+
+        lid = request.session.get('lid')
+        artist = artistTbl.objects.filter(LOGINID_id=lid).first()
+        if not artist:
+            return HttpResponse('''<script>alert('Artist profile not found');window.location='/add_product'</script>''')
+
+        ob = productTbl()
+        ob.name = name
+        ob.work = fp
+        ob.description = desc
+        ob.amount = price
+        ob.date = datetime.datetime.now()
+        ob.ARTIST = artist
+        ob.save()
+        return HttpResponse('''<script>alert('Product added successfully');window.location='/view_product'</script>''')
+    except Exception as e:
+        print(e)
+        return HttpResponse(f'''<script>alert('An error occurred');window.location='/add_product'</script>''')
+
+def add_schedulepost(request):
+    try:
+        date = request.POST.get("date")
+        time = request.POST.get("time")
+
+        lid = request.session.get('lid')
+        artist = artistTbl.objects.filter(LOGINID_id=lid).first()
+        if not artist:
+            return HttpResponse('''<script>alert('Artist profile not found');window.location='/view_shedule'</script>''')
+
+        ob = schedulesTbl()
+        ob.date = date
+        ob.time = time
+        ob.status = 'available'
+        ob.ARTIST = artist
+        ob.save()
+        return HttpResponse('''<script>alert('Schedule added successfully');window.location='/view_shedule'</script>''')
+    except Exception as e:
+        print(e)
+        return HttpResponse('''<script>alert('An error occurred');window.location='/add_schedule'</script>''')
+
+def add_designpost(request):
+    try:
+        name = request.POST.get("name")
+        desc = request.POST.get("description")
+        image = request.FILES.get('image')
+
+        if not image:
+             return HttpResponse('''<script>alert('Please select an image');window.location='/add_design'</script>''')
+
+        fs = FileSystemStorage()
+        fp = fs.save(image.name, image)
+
+        lid = request.session.get('lid')
+        artist = artistTbl.objects.filter(LOGINID_id=lid).first()
+        if not artist:
+            return HttpResponse('''<script>alert('Artist profile not found');window.location='/add_design'</script>''')
+
+        ob = designTbl()
+        ob.name = name
+        ob.image = fp
+        ob.description = desc
+        ob.date = datetime.date.today()
+        ob.ARTIST = artist
+        ob.status = 'pending'
+        ob.save()
+        return HttpResponse('''<script>alert('Design added successfully');window.location='/view_design'</script>''')
+    except Exception as e:
+        print(e)
+        return HttpResponse('''<script>alert('An error occurred');window.location='/add_design'</script>''')

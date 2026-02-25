@@ -1,248 +1,174 @@
-<!--suppress ALL -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{% extends 'artist/index2.html' %}
 {% load static %}
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <title> art gallery by nishmal</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
-
-    <!-- Favicon -->
-    <link href="{% static 'img/favicon.ico' %}" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Flaticon Font -->
-    <link href="{% static 'Artist/lib/flaticon/font/flaticon.css' %}" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="{% static 'Artist/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-    <link href="{% static 'Artist/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{% static 'Artist/css/style.css' %}?v=2.0" rel="stylesheet">
-</head>
-
-<body>
-    <!-- Topbar Start -->
-    <div class="container-fluid">
-        <div class="row bg-secondary py-2 px-lg-5">
-            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-white pr-3" href="https://iask.ai/">FAQs</a>
-                    <span class="text-white">|</span>
-                    <a class="text-white px-3" href="https://iask.ai/">Help</a>
-                    <span class="text-white">|</span>
-                    <a class="text-white pl-3" href="https://iask.ai/">Support</a>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-white px-3" href="https://www.facebook.com/share/1HxERf8P4J/?mibextid=wwXIfr">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a class="text-white px-3" href="https://x.com/Nishmaljr17">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a class="text-white px-3"
-                        href="https://www.linkedin.com/in/nishmal-cp-27284139b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-white px-3" href="https://www.instagram.com/n.ishm_al?igsh=ZWgyeGQyM2lza3hm">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a class="text-white pl-3" href="https://youtube.com/@nishmal9871?si=BypPKhr7Gx7gElbv">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="row py-3 px-lg-5">
-            <div class="col-lg-4">
-                <a href="" class="navbar-brand d-none d-lg-block">
-                    <h1 class="m-0 display-5 text-capitalize"><span class="text-primary">Art</span>Gallery</h1>
-                </a>
-            </div>
-            <div class="col-lg-8 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <div class="d-inline-flex flex-column text-center pr-3 border-right">
-                        <h6>Opening Hours</h6>
-                        <p class="m-0">8.00AM - 9.00PM</p>
-                    </div>
-                    <div class="d-inline-flex flex-column text-center px-3 border-right">
-                        <h6>Email Us</h6>
-                        <p class="m-0">www.nishmaljr17@gmail.com</p>
-                    </div>
-                    <div class="d-inline-flex flex-column text-center pl-3">
-                        <h6>Call Us</h6>
-                        <p class="m-0">91+ 9947854360</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar End -->
-
-
-    <!-- Navbar Start -->
-    <div class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
-            <a href="" class="navbar-brand d-block d-lg-none">
-                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span
-                        class="text-primary">Safety</span>First</h1>
-            </a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                <div class="navbar-nav mr-auto py-0">
-                    <a href="/artistHome" class="nav-item nav-link active">Home</a>
-                    <a href="/artist_change_password" class="nav-item nav-link">change password</a>
-                    <a href="/view_profile_and_update" class="nav-item nav-link">view profile and update</a>
-                    <a href="/view_design" class="nav-item nav-link">view design</a>
-                    <a href="/chatwithuser" class="nav-item nav-link">Chat</a>
-                    <a href="/view_shedule" class="nav-item nav-link">view schedule</a>
-                    <div class="nav-item dropdown">
-                        <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown">Views</a>
-                        <div class="dropdown-menu rounded-0 m-0">
-                            <a href="/view_booking" class="dropdown-item">view booking</a>
-                            <a href="/view_payment_details" class="dropdown-item">view payment details</a>
-                            <a href="/view_other_work_and_like" class="dropdown-item">view other work and like</a>
-                            <a href="/view_post" class="dropdown-item">view post</a>
-
+{% block body %}
+<!-- Dashboard Welcome Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card border-0 shadow-lg rounded-2xl overflow-hidden"
+            style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+            <div class="card-body p-5 text-white position-relative">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h1 class="display-4 font-weight-bold mb-3">Welcome Home, Artist!</h1>
+                        <p class="lead opacity-8 mb-4">Your creative sanctuary is ready. Manage your gallery, tracking
+                            bookings, and share your masterpieces with the world from one central hub.</p>
+                        <div class="d-flex flex-wrap">
+                            <a href="/add_product"
+                                class="btn btn-light btn-lg rounded-pill px-4 mr-3 mb-3 shadow-sm font-weight-bold">
+                                <i class="fas fa-palette mr-2 text-primary"></i>Sell New Art
+                            </a>
+                            <a href="/add_post"
+                                class="btn btn-outline-light btn-lg rounded-pill px-4 mb-3 font-weight-bold">
+                                <i class="fas fa-images mr-2"></i>Post to Gallery
+                            </a>
                         </div>
                     </div>
-                    <a href="/view_product" class="nav-item nav-link">view product</a>
+                    <div class="col-lg-4 d-none d-lg-block text-right">
+                        <i class="fas fa-paint-brush fa-10x opacity-2"></i>
+                    </div>
                 </div>
-                <a href="/logout" class="btn btn-lg btn-primary px-3 d-none d-lg-block"> Logout</a>
             </div>
-        </nav>
+        </div>
     </div>
-    <!-- Navbar End -->
+</div>
 
+<!-- Stats Counter Section -->
+<div class="row mb-5">
+    <div class="col-md-3 mb-4">
+        <div class="card border-0 shadow-sm rounded-xl py-3 text-center transition-all hover-translate-y">
+            <div class="card-body">
+                <div class="icon-circle mx-auto mb-3 bg-light-primary text-primary">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h2 class="font-weight-bold">Product</h2>
+                <p class="text-muted m-0">Gallery Items</p>
+                <a href="/view_product" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card border-0 shadow-sm rounded-xl py-3 text-center transition-all hover-translate-y">
+            <div class="card-body">
+                <div class="icon-circle mx-auto mb-3 bg-light-success text-success">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h2 class="font-weight-bold">Status</h2>
+                <p class="text-muted m-0">Active Bookings</p>
+                <a href="/view_booking" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card border-0 shadow-sm rounded-xl py-3 text-center transition-all hover-translate-y">
+            <div class="card-body">
+                <div class="icon-circle mx-auto mb-3 bg-light-info text-info">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h2 class="font-weight-bold">Social</h2>
+                <p class="text-muted m-0">Latest Chats</p>
+                <a href="/chatwithuser" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card border-0 shadow-sm rounded-xl py-3 text-center transition-all hover-translate-y">
+            <div class="card-body">
+                <div class="icon-circle mx-auto mb-3 bg-light-warning text-warning">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h2 class="font-weight-bold">Wallet</h2>
+                <p class="text-muted m-0">Payment History</p>
+                <a href="/view_payment_details" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0">
-        <div id="header-carousel" class="carousel slide" data-ride="carousel">
+<!-- Original Carousel Section (Preserved) -->
+<div class="row">
+    <div class="col-12">
+        <div id="dashboardCarousel" class="carousel slide shadow-lg rounded-2xl overflow-hidden" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="../../static/Artist/img/carousel-1.jpg" alt="Image">
+                    <img class="w-100" src="{% static 'Artist/img/carousel-1.jpg' %}" alt="Image"
+                        style="height: 400px; object-fit: cover; filter: brightness(0.6);">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h3 class="text-white mb-3 d-none d-sm-block"> Are you an art enthusiast?</h3>
-                            <h1 class="display-3 text-white mb-3"> Welcome To Our Art Gallery</h1>
-                            <h5 class="text-white mb-3 d-none d-sm-block">The best place to find authentic Art</h5>
-                            <a href="" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Buy Now$</a>
-                            <a href="https://iask.ai/" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Learn More</a>
-                        </div>
+                        <h2 class="text-white font-weight-bold mb-3">Showcase Your Soul</h2>
+                        <p class="mb-4 d-none d-md-block">Transform your passion into a global gallery.</p>
+                        <a href="/view_product" class="btn btn-primary rounded-pill px-4 font-weight-bold">VIEW
+                            GALLERY</a>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="../../static/Artist/img/carousel-2.jpg" alt="Image">
+                    <img class="w-100" src="{% static 'Artist/img/carousel-2.jpg' %}" alt="Image"
+                        style="height: 400px; object-fit: cover; filter: brightness(0.6);">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h3 class="text-white mb-3 d-none d-sm-block"> Are you an art enthusiast?</h3>
-                            <h1 class="display-3 text-white mb-3">Welcome To Our Art Gallery</h1>
-                            <h5 class="text-white mb-3 d-none d-sm-block">The best place to find authentic Art</h5>
-                            <a href="" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Buy Now$</a>
-                            <a href="https://iask.ai/" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Learn More</a>
-                        </div>
+                        <h2 class="text-white font-weight-bold mb-3">Connect With Collectors</h2>
+                        <p class="mb-4 d-none d-md-block">Build meaningful relationships through your art.</p>
+                        <a href="/chatwithuser" class="btn btn-primary rounded-pill px-4 font-weight-bold">START
+                            CHATTING</a>
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
-                <div class="btn btn-primary rounded" style="width: 45px; height: 45px;">
-                    <span class="carousel-control-prev-icon mb-n2"></span>
-                </div>
+            <a class="carousel-control-prev" href="#dashboardCarousel" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
             </a>
-            <a class="carousel-control-next" href="#header-carousel" data-slide="next">
-                <div class="btn btn-primary rounded" style="width: 45px; height: 45px;">
-                    <span class="carousel-control-next-icon mb-n2"></span>
-                </div>
+            <a class="carousel-control-next" href="#dashboardCarousel" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
             </a>
         </div>
     </div>
-    <!-- Carousel End -->
+</div>
 
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white py-5 px-sm-3 px-md-5">
-        <div class="row pt-5">
-            <div class="col-lg-12 col-md-12 text-center">
-                <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Art</span>Gallery</h1>
-                <p class="m-0">Created by Nishmal</p>
-                <div class="d-flex justify-content-center mt-4">
-                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0"
-                        style="width: 36px; height: 36px;"
-                        href="https://www.facebook.com/share/1HxERf8P4J/?mibextid=wwXIfr"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0"
-                        style="width: 36px; height: 36px;" href="https://x.com/Nishmaljr17"><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0"
-                        style="width: 36px; height: 36px;"
-                        href="https://www.linkedin.com/in/nishmal-cp-27284139b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><i
-                            class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0"
-                        style="width: 36px; height: 36px;"
-                        href="https://www.instagram.com/n.ishm_al?igsh=ZWgyeGQyM2lza3hm"><i
-                            class="fab fa-instagram"></i></a>
-                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0"
-                        style="width: 36px; height: 36px;"
-                        href="https://youtube.com/@nishmal9871?si=BypPKhr7Gx7gElbv"><i class="fab fa-youtube"></i></a>
-                </div>
-                <p class="m-0 mt-3 text-white">
-                    &copy; <a class="text-white font-weight-bold" href="#">Art Gallery</a>. All Rights Reserved.
-                </p>
-                <p class="m-0 mt-2 text-white">
-                    Email: <a href="mailto:www.nishmaljr17@gmail.com" class="text-white">www.nishmaljr17@gmail.com</a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
+<style>
+    .rounded-2xl {
+        border-radius: 1.5rem !important;
+    }
 
-    <!-- Back to Top -->
+    .rounded-xl {
+        border-radius: 1rem !important;
+    }
 
+    .opacity-8 {
+        opacity: 0.8;
+    }
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'Artist/lib/easing/easing.min.js' %}"></script>
-    <script src="{% static 'Artist/lib/owlcarousel/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'Artist/lib/tempusdominus/js/moment.min.js' %}"></script>
-    <script src="{% static 'Artist/lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
-    <script src="{% static 'Artist/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+    .opacity-2 {
+        opacity: 0.15;
+    }
 
-    <!-- Contact Javascript File -->
-    <script src="{% static 'Artist/mail/jqBootstrapValidation.min.js' %}"></script>
-    <script src="{% static 'Artist/mail/contact.js' %}"></script>
+    .bg-light-primary {
+        background: rgba(78, 115, 223, 0.1);
+    }
 
-    <!-- Template Javascript -->
-    <script src="{% static 'Artist/js/main.js' %}"></script>
-</body>
+    .bg-light-success {
+        background: rgba(28, 200, 138, 0.1);
+    }
 
-</html>
+    .bg-light-info {
+        background: rgba(54, 185, 204, 0.1);
+    }
+
+    .bg-light-warning {
+        background: rgba(246, 194, 62, 0.1);
+    }
+
+    .icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .hover-translate-y:hover {
+        transform: translateY(-5px);
+    }
+
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+</style>
+{% endblock %}

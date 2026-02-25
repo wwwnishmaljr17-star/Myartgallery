@@ -1,75 +1,149 @@
 {% extends 'artist/index2.html' %}
 {% block body %}
-<div class="card shadow-sm border-0 rounded-lg">
-    <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
-        <h4 class="m-0 font-weight-bold"><i class="fas fa-images mr-2"></i>My Gallery Posts</h4>
-        <a href="/add_post" class="btn btn-light btn-sm font-weight-bold shadow-sm">
-            <i class="fas fa-plus mr-1"></i>Add New Post
-        </a>
-    </div>
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover mb-0">
-                <thead class="thead-light">
-                    <tr>
-                        <th class="px-4">S.NO</th>
-                        <th>NAME</th>
-                        <th>IMAGE</th>
-                        <th>DATE</th>
-                        <th>DESCRIPTION</th>
-                        <th>ACTIONS</th>
-                        <th class="px-4 text-center">ENGAGEMENT</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in data %}
-                    <tr>
-                        <td class="px-4 font-weight-bold text-muted">{{ forloop.counter }}</td>
-                        <td class="font-weight-bold">{{ i.postname }}</td>
-                        <td>
-                            <a href="{{ i.design.url }}" target="_blank">
-                                <img src="{{ i.design.url }}" class="rounded shadow-sm" height="60" width="60"
-                                    style="object-fit: cover;">
-                            </a>
-                        </td>
-                        <td>{{ i.date }}</td>
-                        <td><small class="text-muted d-block text-truncate" style="max-width: 150px;">{{ i.post
-                                }}</small></td>
-                        <td>
-                            <div class="btn-group">
-                                <a href="edit_post/{{ i.id }}"
-                                    class="btn btn-outline-primary btn-sm rounded-pill px-3 mr-1">
-                                    <i class="fas fa-edit mr-1"></i>Edit
-                                </a>
-                                <a href="delete_post/{{ i.id }}" class="btn btn-outline-danger btn-sm rounded-pill px-3"
-                                    onclick="return confirm('Delete this post?')">
-                                    <i class="fas fa-trash-alt mr-1"></i>Delete
-                                </a>
-                            </div>
-                        </td>
-                        <td class="px-4 text-center">
-                            <div class="btn-group">
-                                <a href="/view_comment_and_like/{{ i.id }}"
-                                    class="btn btn-info btn-sm rounded-pill px-3 mr-1">
-                                    <i class="fas fa-comment mr-1"></i>Comments
-                                </a>
-                                <a href="/view_like/{{ i.id }}" class="btn btn-primary btn-sm rounded-pill px-3">
-                                    <i class="fas fa-thumbs-up mr-1"></i>Likes
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="7" class="text-center py-5 text-muted">
-                            <i class="fas fa-images fa-3x mb-3 d-block"></i>
-                            <p class="mb-0">No posts found in your gallery.</p>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="m-0 font-weight-bold text-dark"><i class="fas fa-images mr-2 text-primary"></i>My Gallery Posts</h2>
+    <a href="/add_post" class="btn btn-primary btn-lg shadow-sm font-weight-bold rounded-pill px-4">
+        <i class="fas fa-plus-circle mr-2"></i>NEW POST
+    </a>
+</div>
+
+<div class="row">
+    {% for i in data %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-2xl border-0 rounded-2xl overflow-hidden post-card transition-all">
+            <div class="position-relative">
+                {% if i.design %}
+                <img src="{{ i.design.url }}" class="card-img-top" alt="{{ i.postname }}"
+                    style="height: 300px; object-fit: cover;">
+                <div class="post-overlay d-flex align-items-center justify-content-center">
+                    <a href="{{ i.design.url }}" target="_blank" class="btn btn-light rounded-circle shadow-lg p-3">
+                        <i class="fas fa-expand-alt fa-lg text-primary"></i>
+                    </a>
+                </div>
+                {% else %}
+                <div class="card-img-top bg-light d-flex align-items-center justify-content-center"
+                    style="height: 300px;">
+                    <i class="fas fa-image fa-4x text-muted"></i>
+                </div>
+                {% endif %}
+                <div class="position-absolute bg-white px-3 py-1 rounded-pill shadow-sm" style="top: 15px; left: 15px;">
+                    <small class="font-weight-bold text-primary"><i class="far fa-calendar-alt mr-1"></i>{{ i.date
+                        }}</small>
+                </div>
+            </div>
+            <div class="card-body d-flex flex-column p-4">
+                <h5 class="card-title font-weight-bold text-dark mb-2">{{ i.postname }}</h5>
+                <p class="card-text text-muted small mb-4 flex-grow-1">{{ i.post }}</p>
+
+                <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                    <!-- Engagement Info -->
+                    <div class="d-flex align-items-center">
+                        <a href="/view_like/{{ i.id }}" class="text-decoration-none mr-3 text-primary hover-scale">
+                            <i class="fas fa-heart mr-1"></i><span class="small font-weight-bold text-dark">Likes</span>
+                        </a>
+                        <a href="/view_comment_and_like/{{ i.id }}" class="text-decoration-none text-info hover-scale">
+                            <i class="fas fa-comment mr-1"></i><span
+                                class="small font-weight-bold text-dark">Comments</span>
+                        </a>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="btn-group">
+                        <a href="/edit_post/{{ i.id }}"
+                            class="btn btn-sm btn-white shadow-sm border rounded-pill px-3 mr-2">
+                            <i class="fas fa-pencil-alt text-primary"></i>
+                        </a>
+                        <a href="/delete_post/{{ i.id }}"
+                            class="btn btn-sm btn-white shadow-sm border rounded-pill px-3"
+                            onclick="return confirm('Archive this post?')">
+                            <i class="fas fa-trash-alt text-danger"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    {% empty %}
+    <div class="col-12 py-5 text-center">
+        <div class="empty-state-card py-5 px-4 rounded-2xl border-dashed-2">
+            <div class="icon-circle mb-4 mx-auto bg-light-primary text-primary">
+                <i class="fas fa-images fa-3x"></i>
+            </div>
+            <h3 class="font-weight-bold text-dark mb-2">Start Your Creative Journey</h3>
+            <p class="text-muted mb-4 mx-auto" style="max-width: 400px;">Share your latest works, inspirations, and art
+                stories with the community. Your first post is just a click away.</p>
+            <a href="/add_post" class="btn btn-primary btn-xl rounded-pill px-5 shadow-lg transition-all hover-grow">
+                <i class="fas fa-magic mr-2"></i>CREATE YOUR FIRST POST
+            </a>
+        </div>
+    </div>
+    {% endfor %}
 </div>
+
+<style>
+    .shadow-2xl {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .rounded-2xl {
+        border-radius: 1.5rem !important;
+    }
+
+    .rounded-xl {
+        border-radius: 1rem !important;
+    }
+
+    .post-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .post-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(78, 115, 223, 0.4);
+        opacity: 0;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(2px);
+    }
+
+    .post-card:hover .post-overlay {
+        opacity: 1;
+    }
+
+    .btn-white {
+        background: white;
+    }
+
+    .bg-light-primary {
+        background: rgba(78, 115, 223, 0.1);
+    }
+
+    .icon-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .border-dashed-2 {
+        border: 2px dashed #e3e6f0;
+    }
+
+    .hover-grow:hover {
+        transform: scale(1.05);
+    }
+
+    .hover-scale :hover {
+        transform: scale(1.1);
+    }
+
+    .transition-all {
+        transition: all 0.4s ease;
+    }
+</style>
 {% endblock %}

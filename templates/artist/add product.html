@@ -2,55 +2,71 @@
 {% block body %}
 <div class="row justify-content-center">
   <div class="col-lg-8">
-    <div class="card shadow-lg border-0 rounded-lg">
-      <div class="card-header bg-primary text-white py-3">
-        <h4 class="m-0 font-weight-bold"><i class="fas fa-cart-plus mr-2"></i>Add New Product</h4>
+    <div class="card shadow-2xl border-0 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-3xl">
+      <div class="card-header border-0 py-4 px-5"
+        style="background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);">
+        <h3 class="m-0 font-weight-bold text-white d-flex align-items-center">
+          <i class="fas fa-magic mr-3"></i>Post a New Masterpiece
+        </h3>
       </div>
-      <div class="card-body p-4 p-md-5">
+      <div class="card-body p-4 p-md-5 bg-white">
         <form id="productForm" name="productForm" method="post" action="/add_productpost" enctype="multipart/form-data">
           {% csrf_token %}
-          <div class="form-group mb-4">
-            <label class="font-weight-bold text-dark" for="productName"><i class="fas fa-tag mr-1 text-primary"></i>
-              PRODUCT NAME</label>
-            <input type="text" id="productName" name="productName"
-              class="form-control form-control-lg border-primary-soft shadow-sm" required pattern="[A-Z a-z.]{3,25}"
-              placeholder="Enter product name">
-            <small class="text-muted">3-25 characters, letters and dots only.</small>
-          </div>
-
-          <div class="form-group mb-4">
-            <label class="font-weight-bold text-dark" for="workFile"><i class="fas fa-image mr-1 text-primary"></i> WORK
-              FILE</label>
-            <div class="custom-file">
-              <input type="file" id="workFile" name="workFile" class="custom-file-input shadow-sm" required>
-              <label class="custom-file-label border-primary-soft" for="workFile">Choose product image...</label>
-            </div>
-          </div>
-
-          <div class="form-group mb-4">
-            <label class="font-weight-bold text-dark" for="description"><i
-                class="fas fa-align-left mr-1 text-primary"></i> DESCRIPTION</label>
-            <textarea id="description" name="description"
-              class="form-control form-control-lg border-primary-soft shadow-sm" required rows="3"
-              placeholder="Describe the product..."></textarea>
-          </div>
-
-          <div class="form-group mb-4">
-            <label class="font-weight-bold text-dark" for="price"><i class="fas fa-coins mr-1 text-primary"></i>
-              PRICE</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text bg-white border-primary-soft text-primary font-weight-bold">₹</span>
+          <div class="row">
+            <div class="col-md-12 mb-4">
+              <div class="form-floating-custom">
+                <label class="small font-weight-bold text-primary text-uppercase mb-2 d-block">Artwork Title</label>
+                <div class="input-group input-group-lg shadow-sm">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-white border-right-0"><i
+                        class="fas fa-signature text-primary"></i></span>
+                  </div>
+                  <input type="text" id="productName" name="productName"
+                    class="form-control form-control-lg border-left-0 font-weight-600" required
+                    placeholder="What's the name of your work?">
+                </div>
               </div>
-              <input type="number" id="price" name="price"
-                class="form-control form-control-lg border-primary-soft shadow-sm" required placeholder="0" step="1">
             </div>
-          </div>
 
-          <div class="text-center mt-5">
-            <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block py-3 font-weight-bold shadow">
-              <i class="fas fa-plus mr-2"></i>ADD PRODUCT
-            </button>
+            <div class="col-md-12 mb-4">
+              <label class="small font-weight-bold text-primary text-uppercase mb-2 d-block">Showcase Image</label>
+              <div class="upload-area p-4 text-center rounded-xl border-2 border-dashed transition-all" id="dropZone"
+                style="border-color: #d1d3e2; background: #f8f9fc;">
+                <input type="file" id="workFile" name="workFile" class="d-none" required>
+                <label for="workFile" class="cursor-pointer mb-0">
+                  <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
+                  <h5 class="font-weight-bold text-dark mb-1">Upload Your Artwork</h5>
+                  <p class="text-muted small mb-0" id="fileNameDisp">Drag & drop or click to browse</p>
+                </label>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+              <label class="small font-weight-bold text-primary text-uppercase mb-2 d-block">Investment Value
+                (₹)</label>
+              <div class="input-group input-group-lg shadow-sm">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-light font-weight-bold">₹</span>
+                </div>
+                <input type="number" id="price" name="price" class="form-control form-control-lg font-weight-bold"
+                  required placeholder="0.00">
+              </div>
+            </div>
+
+            <div class="col-md-12 mb-5">
+              <label class="small font-weight-bold text-primary text-uppercase mb-2 d-block">The Story Behind the
+                Art</label>
+              <textarea id="description" name="description" class="form-control form-control-lg shadow-sm border-soft"
+                required rows="4"
+                placeholder="Share the inspiration, materials, and passion behind this piece..."></textarea>
+            </div>
+
+            <div class="col-12">
+              <button type="submit"
+                class="btn btn-primary btn-block btn-xl py-3 rounded-pill shadow-lg font-weight-bold transition-all hover-grow">
+                <i class="fas fa-rocket mr-2"></i>LAUNCH TO GALLERY
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -58,14 +74,46 @@
   </div>
 </div>
 
+<style>
+  .rounded-2xl {
+    border-radius: 1.5rem !important;
+  }
+
+  .rounded-xl {
+    border-radius: 1rem !important;
+  }
+
+  .border-soft {
+    border: 1px solid #e3e6f0;
+  }
+
+  .font-weight-600 {
+    font-weight: 600;
+  }
+
+  .upload-area:hover {
+    border-color: #4e73df !important;
+    background: #f0f3ff !important;
+  }
+
+  .hover-grow:hover {
+    transform: scale(1.02) translateY(-3px);
+  }
+
+  .btn-xl {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+
+  .transition-all {
+    transition: all 0.3s ease;
+  }
+</style>
+
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (typeof $ !== 'undefined') {
-      $(".custom-file-input").on("change", function () {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-      });
-    }
-  });
+  document.getElementById('workFile').onchange = function () {
+    document.getElementById('fileNameDisp').innerHTML = this.files[0].name;
+    document.getElementById('fileNameDisp').className = "text-primary font-weight-bold";
+  };
 </script>
 {% endblock %}
